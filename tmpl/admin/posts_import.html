@@ -1,0 +1,10 @@
+{% extends "admin/skeleton.html" %}
+{% block title %}Import Posts{% endblock %}
+{% block maincontent %}
+  <h1>Import Posts</h1>
+  <p>Upload a .csv file containing blog posts, to import into the data store.</p>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="csv">
+    <input type="submit" value="Import">
+  </form>
+{% endblock %}

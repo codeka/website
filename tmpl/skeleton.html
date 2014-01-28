@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+  <title>{% block pagetitleprefix %}Codeka &bull; {% endblock %}{% block pagetitle %}An Android MMO{% endblock %}</title>
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="/v{{resource_version}}/css/reset.css">
+  <link rel="stylesheet" href="/v{{resource_version}}/css/style.css">
+  <link rel="stylesheet" href="/v{{resource_version}}/css/mobile.css" media="only screen and (max-width: 900px)" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Quando">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+{% block header %}{% endblock %}
+</head>
+<body>
+    <header id="page-header">
+      <div class="contact">Email: <a href="mailto:dean@codeka.com.au">dean@codeka.com.au</a></div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/">Home</a>
+          <li><a href="/showcase">Showcase</a>
+          <li><a href="mailto:dean@codeka.com.au">Contact</a>
+          <li><a href="/blog">Dean's Blog</a>
+        </ul>
+      </nav>
+      {% if is_logged_in %}
+        <nav class="userinfo">
+          Welcome, {{user.email()}}.
+          <a href="{{logout_url}}">Log out</a>
+        </nav>
+      {% endif %}
+      {% block headerlinks %}{% endblock %}
+    </header>
+{% if is_writer %}
+    <nav class="admin">
+      <ul>
+        <li><a href="/admin">Backend</a>
+{% block adminbuttons %}{% endblock %}
+      </ul>
+    </nav>
+{% endif %}
+{% block maincontent %}{% endblock %}
+</body>

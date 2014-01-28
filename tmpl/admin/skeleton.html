@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <title>War Worlds &bull; {% block title %}Admin{% endblock %}</title>
+  <link rel="stylesheet" href="/v{{resource_version}}/css/reset.css">
+  <link rel="stylesheet" href="/v{{resource_version}}/css/style.css">
+  <link rel="stylesheet" href="/v{{resource_version}}/css/admin.css">
+
+  <link rel="stylesheet" href="/v{{resource_version}}/js/markitup/skins/default/style.css" />
+  <link rel="stylesheet" href="/v{{resource_version}}/js/markitup/sets/default/style.css" />
+  {%- block extracss %}{% endblock %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/v{{resource_version}}/ckeditor/ckeditor.js"></script>
+  {%- block extrajs %}{% endblock -%}
+</head>
+<body>
+  <header id="main-header">
+    <h1>Codeka</h1>
+  </header>
+  <section id="main-content">{% block maincontent %}{% endblock %}</section>
+  <nav id="main-nav">
+    <ul>
+      <li><a href="/admin/posts">Blog</a>
+        <ul>
+          <li><a href="/admin/posts/new">New Post</a>
+          <li><a href="/admin/posts/import">Import</a>
+        </ul>
+      <li><a href="/">Leave Backend</a>
+    </ul>
+  </nav>
+</body>

@@ -1,0 +1,32 @@
+application: codekasite
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+libraries:
+- name: jinja2
+  version: latest
+
+builtins:
+- appstats: off
+
+handlers:
+- url: /v[0-9]+/(.*)
+  static_files: static/\1
+  upload: static/.*
+  expiration: "365d"
+
+- url: /(favicon.ico)
+  static_files: static/\1
+  upload: static/*.ico
+  expiration: "365d"
+
+- url: /blog(/.*)?
+  script: handlers.blog.app
+
+- url: /admin(/.*)?
+  script: handlers.admin.app
+
+- url: /.*
+  script: handlers.main.app
