@@ -13,14 +13,6 @@
 
 {% block maincontent %}
   <section class="content">
-      <nav class="breadcrumbs">
-      <ul>
-        <li><a href="/">War Worlds</a>
-        <li><a href="/blog">Blog</a>
-        <li><span>{{post.title}}</span>
-      </ul>
-    </nav>
-
     {{ pm.post_body(post, False) }}
     <div id="post-comments">
       <div id="disqus_thread"></div>
@@ -43,4 +35,7 @@ var disqus_developer = true;
     </div>
   </section>
   {{pm.body_footer(resource_version)}}
+  <section class="copyright">
+    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Codeka Consulting</a>
+  </section>
 {% endblock %}

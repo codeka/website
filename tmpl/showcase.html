@@ -1,0 +1,126 @@
+{% extends "skeleton.html" %}
+
+{% block header %}
+    <style>
+      section.maincontent {
+        position: relative;
+        width: 900px;
+        margin: 15px auto 0 auto;
+      }
+      article {
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+      h2 {
+        margin: 0; padding: 0;
+      }
+
+      article.highlight {
+        padding: 10px;
+        border: dashed 2px #bbc;
+        background: #eef;
+        border-radius: 5px;
+      }
+
+      article p, article blockquote {
+        margin-top: 0;
+        margin-left: 340px;
+        border: none;
+      }
+      article blockquote {
+        padding: 10px 60px 1px 60px;
+      }
+      article blockquote p {
+        margin-left: 0;
+      }
+      article blockquote:before {
+        content: "\201C";
+        height: 0;
+        line-height: 60px;
+        margin-left: -0.55em;
+        font-family: arial, serif;
+        color: #CCD;
+        display: block;
+        font-size: 700%;
+        width: 50px;
+      }
+
+      div.showcase-image {
+        width: 330px;
+        float: left;
+        margin-right: 10px;
+        text-align: center;
+      }
+
+      div.showcase-image img {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+    </style>
+{% endblock %}
+
+{% block maincontent %}
+  <section class="maincontent">
+    <article>
+      <h2><a href="http://www.themotorreport.com.au/">The Motor Report</a></h2>
+      <div class="showcase-image"><img alt="" src="/v{{resource_version}}/img/showcase/tmr-1.jpg" width="320" height="248" /></div>
+      <p>The Motor Report is a leading Australian motoring news and review site. The site is maintained by a team of
+         writers and editors, and has been in operating since 2007.</p>
+      <p>Already a well-established site, Codeka Consulting was brought in to re-build the site using a fresh new design
+         and also to add a number of prominent new features, such as areas dedicated to green cars, family cars and so on
+         as well as a new format for reviews and better integration of photo gallery features.</p>
+      <p>The project took around 6 weeks from beginning to end, and Codeka Consulting continues to work with The Motor
+         Report on gradual improvements and new features.</p>
+      <div style="clear: both;"></div>
+    </article>
+
+    <article class="highlight">
+      <h2><a href="http://www.ausbt.com.au/">Australian Business Traveller</a></h2>
+      <div class="showcase-image"><img alt="" src="/v{{resource_version}}/img/showcase/ausbt-1.jpg" width="320" height="244" /></div>
+      <p>Australian Business Traveller is a website for business travellers and frequent fliers. It has news, reviews and
+         a dedicated question &amp; answer section that is specifically tailored for the needs of business and other
+         frequent travellers.</p>
+      <p>Codeka Consulting built the site from the ground up using the latest web technologies and brought the site to
+         market faster than the client thought possible.</p>
+      <blockquote>
+       <p>Dean is a coder who achieves a rare triumverate of results: fast turnaround on projects; amazingly minimal bugs
+          (and fast resolution of ones that are there) and high performance, fast-running code. I have been involved with
+          projects where we spent hundreds of thousands of dollars on development teams, who, after 18 months, still
+          hadn&#8217;t developed anything nearly as good as what Dean was able to single-handedly develop for Australian
+          Business Traveller in less than three weeks. I wouldn&#8217;t hesitate to recommend him</p>
+        <p>&nbsp; &mdash; Dan Warne, Deputy Editor, <a href="http://www.ausbt.com.au/">Australian Business Traveller</a></p>
+      </blockquote>
+      <p>Even in it&#8217;s first few weeks, the site was getting tens of thousands of hits per day, and the numbers
+         are ever increasing. Deep integration with Google and SEO keep the site at the top of relevent search results
+         and on Google News pages.</p>
+      <div style="clear: both;"></div>
+    </article>
+
+    <article>
+      <h2 class="post-title"><a href="http://www.ozbroadbandreview.com/">Oz Broadband Review</a></h2>
+      <div class="showcase-image"><img alt="" src="/v{{resource_version}}/img/showcase/ozbroadbandreview-1.jpg?" width="240" height="200" /></div>
+      <p>A review site for Australian Broadband providers and ISPs, Oz Broadband Review is a resource for people looking to compare and evaluate
+         the various ISPs in Australia.</p>
+      <p>The site and database schema already existing from a previous iteration, and Codeka Consulting was contracted to rebuild the site from
+         scratch using a new layout and design.</p>
+      <div style="clear: both;"></div>
+    </article>
+
+    <article>
+      <h2 class="post-title"><a href="http://www.extremeactivities.com.au/">Extreme Activties</a></h2>
+      <div class="showcase-image"><img alt="" src="/v{{resource_version}}/img/showcase/extremeactivities-1.jpg" width="240" height="200" /></div>
+      <p>ExtremeActivties.com.au is a website dedicated to linking you to extreme and other outdoor activites that the
+         whole family can enjoy. With links to V8 and Rally driving, paintball, Jet Fighter flights, Skiing, Snowboard,
+         White Water rafting and more, there&#8217;s sure to be something to excite you!</p>
+      <p>The site was built by Codeka Consulting from the ground up. The goal was a simple-to-use layout that presented
+         the information to the user in an easy to read and easy to understand format.</p>
+      <p>The site partnered with godo.com.au who provides the actual activities and an API between the two sites keeps
+         the Extreme Activities site constantly up-to-date with all of the latest activities available there.</p>
+      <div style="clear: both;"></div>
+    </article>
+  </section>
+  <section class="copyright">
+    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Codeka Consulting</a>
+  </section>
+{% endblock %}

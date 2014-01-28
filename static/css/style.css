@@ -49,7 +49,15 @@ blockquote {
 header#page-header {
   height: 100px;
   position: relative;
-  background: #010D55 url(../img/logo.png) no-repeat;
+  background: #010D55;
+  font-family: sans-serif;
+}
+
+header#page-header div.logo-img {
+  position: absolute;
+  background: url(../img/logo.png) no-repeat;
+  width: 782px;
+  height: 262px;
 }
 
 header#page-header div.contact {
@@ -91,8 +99,10 @@ header#page-header nav.main-nav ul li a {
 
 header#page-header nav.userinfo {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 50%;
+  margin-right: -430px;
+  text-align: right;
+  bottom: 20px;
   color: #fff;
 }
 
@@ -100,24 +110,11 @@ header#page-header nav.userinfo a {
   color: #99f;
 }
 
-header a.gplus-btn img {
-  display: block;
-  position: absolute;
-  right: 16px;
-  top: 24px;
-}
-
-header a.twitter-btn img {
-  display: block;
-  position: absolute;
-  right: 56px;
-  top: 24px;
-}
-
 header a.rss-btn img {
   display: block;
   position: absolute;
-  right: 96px;
+  left: 50%;
+  margin-left: 400px;
   top: 26px;
 }
 
