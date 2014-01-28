@@ -34,7 +34,7 @@
   function path() {
     var args = arguments, result = [];
     for(var i = 0; i < args.length; i++) {
-      result.push(args[i].replace('@', '/js/v{{resource_version}}/highlight/'));
+      result.push(args[i].replace('@', '/v{{resource_version}}/js/highlight/'));
     }
     return result;
   }
@@ -42,6 +42,7 @@
   SyntaxHighlighter.autoloader.apply(null, path(
     'cpp c                  @shBrushCpp.js',
     'c# c-sharp csharp      @shBrushCSharp.js',
+    'bash                   @shBrushBash.js',
     'css                    @shBrushCss.js',
     'java                   @shBrushJava.js',
     'js jscript javascript  @shBrushJScript.js',

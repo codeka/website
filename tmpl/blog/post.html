@@ -5,7 +5,7 @@
 {% block pagetitleprefix %}{% endblock %}
 {% block pagetitle %}{{post.title}} - War Worlds{% endblock %}
 {% block title %}Development Blog{% endblock %}
-{% block headerlinks %}<a href="/blog/rss" class="rss-btn"><img src="/img/v1/rss.png" alt="RSS" width="32" height="32" title="RSS Feed" /></a>{% endblock %}
+{% block headerlinks %}<a href="/blog/rss" class="rss-btn"><img src="/v{{resource_version}}/img/rss.png" alt="RSS" width="32" height="32" title="RSS Feed" /></a>{% endblock %}
 
 {% block adminbuttons %}
     <li><a href="/admin/posts/{{post|post_id}}">Edit Post</a></li>
