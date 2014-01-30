@@ -7,20 +7,26 @@ import ctrl.blog
 import handlers
 
 
-class BlogPage(handlers.BaseHandler):
+class BasePage(handlers.BaseHandler):
   pass
 
 
-class HomePage(BlogPage):
+class HomePage(BasePage):
   def get(self):
     self.render('index.html', {})
 
 
-class ShowcasePage(BlogPage):
+class ShowcasePage(BasePage):
   def get(self):
     self.render('showcase.html', {})
 
 
+class NotFoundPage(BasePage):
+  def get(self):
+    self.error(404)
+
+
 app = webapp.WSGIApplication([('/?', HomePage),
-                              ('/showcase', ShowcasePage)],
+                              ('/showcase', ShowcasePage),
+                              ('.*', NotFoundPage)],
                              debug=os.environ['SERVER_SOFTWARE'].startswith('Development'))
