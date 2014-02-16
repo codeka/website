@@ -51,6 +51,7 @@ header#page-header {
   position: relative;
   background: #010D55;
   font-family: sans-serif;
+  z-index: -2;
 }
 
 header#page-header div.logo-img {
@@ -58,6 +59,7 @@ header#page-header div.logo-img {
   background: url(../img/logo.png) no-repeat;
   width: 782px;
   height: 262px;
+  z-index: -1;
 }
 
 header#page-header div.contact {

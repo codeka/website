@@ -17,6 +17,11 @@ handlers:
   upload: static/.*
   expiration: "365d"
 
+- url: /ckeditor(/v[0-9]+)?/(.*)
+  static_files: static/ckeditor/\2
+  upload: static/ckeditor/.*
+  expiration: "365d"
+
 - url: /(favicon.ico|robots.txt)
   static_files: static/\1
   upload: static/(favicon.ico|robots.txt)
