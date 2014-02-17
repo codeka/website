@@ -49,8 +49,14 @@ blockquote {
 header#page-header {
   height: 100px;
   position: relative;
-  background: #010D55;
   font-family: sans-serif;
+}
+
+header#page-header div.logo-container {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  background: #010D55;
   z-index: -2;
 }
 
@@ -112,7 +118,7 @@ header#page-header nav.userinfo a {
   color: #99f;
 }
 
-header a.rss-btn img {
+header#page-header a.rss-btn img {
   display: block;
   position: absolute;
   left: 50%;
@@ -144,10 +150,10 @@ nav.admin a {
 }
 
 section.content {
-  background: #fff;
   padding: 0 20px;
   width: 860px;
   margin: 0 auto;
+  word-wrap: break-word;
 }
 
 section.copyright {

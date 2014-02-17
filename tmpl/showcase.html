@@ -57,11 +57,27 @@
         padding: 0;
         border: 0;
       }
+
+      @media only screen and (max-width: 900px) {
+        div.showcase-image {
+          width: 100%;
+          float: none;
+          text-align: center;
+        }
+
+        article p, article blockquote {
+          margin-left: 0;
+        }
+
+        article blockquote {
+          padding-right: 0;
+        }
+      }
     </style>
 {% endblock %}
 
 {% block maincontent %}
-  <section class="maincontent">
+  <section class="content">
     <article>
       <h2><a href="http://www.themotorreport.com.au/">The Motor Report</a></h2>
       <div class="showcase-image"><img alt="" src="/v{{resource_version}}/img/showcase/tmr-1.jpg" width="320" height="248" /></div>
