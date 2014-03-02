@@ -3,7 +3,7 @@
 
 {% block header %}{{pm.html_header(resource_version)}}{% endblock %}
 {% block pagetitleprefix %}{% endblock %}
-{% block pagetitle %}{{post.title}} - War Worlds{% endblock %}
+{% block pagetitle %}{{post.title}} - Dean's Blog{% endblock %}
 {% block title %}Development Blog{% endblock %}
 {% block headerlinks %}<a href="/blog/rss" class="rss-btn"><img src="/v{{resource_version}}/img/rss.png" alt="RSS" width="32" height="32" title="RSS Feed" /></a>{% endblock %}
 
@@ -36,6 +36,6 @@ var disqus_developer = true;
   </section>
   {{pm.body_footer(resource_version)}}
   <section class="copyright">
-    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Codeka Consulting</a>
+    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Dean Harding</a>
   </section>
 {% endblock %}

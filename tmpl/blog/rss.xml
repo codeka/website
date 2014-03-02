@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <rss version="2.0">
   <channel>
-    <title>War Worlds Development Blog</title>
-    <link>http://www.war-worlds.com/blog</link>
-    <description>An upcoming MMO space exploration game for Android</description>
+    <title>Dean's Blog</title>
+    <link>http://www.codeka.com.au/blog</link>
+    <description>Development blog of Dean Harding.</description>
     <language>en-us</language>
     <pubDate>{{pubDate}}</pubDate>
   {%- for post in posts %}

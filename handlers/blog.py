@@ -34,7 +34,7 @@ class PostPage(BlogPage):
     month = int(month)
     post = ctrl.blog.getPostBySlug(year, month, slug)
     if not post:
-      self.response.set_status(404)
+      self.error(404)
       return
     self.render('blog/post.html', {'post': post})
 

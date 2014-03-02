@@ -12,6 +12,7 @@ import json
 
 import ctrl.blog
 import handlers
+import model.blog
 
 
 class BasePage(handlers.BaseHandler):
@@ -21,11 +22,6 @@ class BasePage(handlers.BaseHandler):
 class HomePage(BasePage):
   def get(self):
     self.render('index.html', {})
-
-
-class ShowcasePage(BasePage):
-  def get(self):
-    self.render('showcase.html', {})
 
 
 class BlobUploadUrlPage(handlers.BaseHandler):
@@ -98,11 +94,43 @@ class BlobInfoPage(handlers.BaseHandler):
             'url': images.get_serving_url(blob_key, size, crop)}
 
 
+class ShowcasePage(BasePage):
+  def get(self):
+    self.render('showcase.html', {})
+
+
+class SitemapXmlPage(BasePage):
+  def get(self):
+    pages = []
+    pages.append({
+        "url": "http://www.codeka.com.au/showcase",
+        "lastmod": "2014-01-01",
+        "priority": 1,
+        "changefreq": "yearly"
+      })
+
+    query = (model.blog.Post.all()
+                  .filter("isPublished", True)
+                  .order('-posted'))
+    for post in query:
+      pages.append({
+          "url": ("http://www.codeka.com.au/blog/%04d/%02d/%s" %
+                     (post.posted.year, post.posted.month, post.slug)),
+          "lastmod": "%04d-%02d-%02d" % (post.updated.year, post.updated.month, post.updated.day),
+          "priority": 10,
+          "changefreq": "monthly"
+        })
+
+    self.render("sitemap.xml", {"pages": pages})
+
+
 class NotFoundPage(BasePage):
   """This is the 404 "not found" page. We'll try to do some guesses as to what you may have wanted though."""
   def get(self):
     if "index.php?tempskin=" in self.request.path_qs:
       self.redirect("/blog/rss")
+    elif "/blogs/" in self.request.path_qs:
+      self.redirect(self.request.path_qs.replace("/blogs/", "/blog/"))
     elif "index.php" in self.request.path_qs:
       self.redirect("/")
     elif self.request.path == "/war-worlds/":
@@ -112,10 +140,11 @@ class NotFoundPage(BasePage):
 
 
 app = webapp.WSGIApplication([('/?', HomePage),
-                              ('/showcase', ShowcasePage),
                               ('/blob/upload-url', BlobUploadUrlPage),
                               ('/blob/upload-complete', BlobUploadCompletePage),
                               ('/blob/([^/]+)', BlobPage),
                               ('/blob/([^/]+)/info', BlobInfoPage),
+                              ('/showcase', ShowcasePage),
+                              ('/sitemap.xml', SitemapXmlPage),
                               ('.*', NotFoundPage)],
                              debug=os.environ['SERVER_SOFTWARE'].startswith('Development'))
