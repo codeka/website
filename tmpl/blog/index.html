@@ -8,7 +8,7 @@
 {% block maincontent %}
   <section class="content">
     {% for post in posts %}
-      {{ pm.post_body(post, True) }}
+      {{ pm.post_body(post, True, resource_version) }}
       <div class="post-comment-count">
         <a href="{{post|post_full_url}}#disqus_thread"></a>
       </div>

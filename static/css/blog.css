@@ -56,3 +56,47 @@ img.float-left {
 img.float-right {
   margin-left: 1em;
 }
+
+article footer {
+  border: solid 1px #ccc;
+  height: 100px;
+}
+
+article footer img {
+  float: left;
+  margin-right: 10pt;
+}
+
+article footer div:nth-child(2) {
+  margin-top: 16pt;
+}
+
+article footer div span {
+  font-weight: bold;
+}
+
+ul.social {
+  height: 16px;
+  list-style-type: none;
+  margin: 4pt 0 0 0;
+}
+
+ul.social li {
+  float: left;
+  margin-right: 10pt;
+  background: url(social.png);
+}
+
+ul.social li a {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url(social.png);
+}
+
+ul.social li a.facebook { background-position: 0 0; }
+ul.social li a.twitter { background-position: -16px 0; }
+ul.social li a.googleplus { background-position: -32px 0; }
+ul.social li a.hackernews { background-position: -80px 0; }
+ul.social li a.reddit { background-position: -48px 0; }
+ul.social li a.pinterest { background-position: -64px; 0; }

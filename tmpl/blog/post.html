@@ -13,7 +13,7 @@
 
 {% block maincontent %}
   <section class="content">
-    {{ pm.post_body(post, False) }}
+    {{ pm.post_body(post, False, resource_version) }}
     <div id="post-comments">
       <div id="disqus_thread"></div>
       <script type="text/javascript">
