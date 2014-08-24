@@ -62,6 +62,11 @@ def _filter_dump_json(obj):
 jinja.filters['dump_json'] = _filter_dump_json
 
 
+def _filter_number(n):
+  return "{:,}".format(n)
+jinja.filters["number"] = _filter_number
+
+
 def getTemplate(tmpl_name):
   return jinja.get_template(tmpl_name)
 
