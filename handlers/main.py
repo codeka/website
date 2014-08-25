@@ -30,7 +30,8 @@ class BlobUploadUrlPage(handlers.BaseHandler):
     if not users.get_current_user():
       self.response.set_status(403)
       return
-    data = {'upload_url': blobstore.create_upload_url('/blob/upload-complete')}
+    url = blobstore.create_upload_url('/blob/upload-complete')
+    data = {'upload_url': url}
     self.response.headers['Content-Type'] = 'application/json'
     self.response.write(json.dumps(data))
 
@@ -64,6 +65,19 @@ class BlobPage(blobstore_handlers.BlobstoreDownloadHandler):
       self.response.headers['Cache-Control'] = 'public, max-age='+str(30*24*60*60) # 30 days
       self.response.headers['Expires'] = (datetime.now() + timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       self.send_blob(blob_key)
+
+
+class BlobDownloadPage(blobstore_handlers.BlobstoreDownloadHandler):
+  def get(self, blob_key):
+    blob_info = blobstore.get(blob_key)
+    if not blob_info:
+      self.error(404)
+    else:
+      self.response.headers["Cache-Control"] = "public, max-age="+str(30*24*60*60) # 30 days
+      self.response.headers["Expires"] = (datetime.now() + timedelta(days=30)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+      self.response.headers["Content-Type"] = blob_info.content_type
+      self.response.headers["Content-Disposition"] = str("attachment; filename=" + blob_info.filename)
+      self.send_blob(blob_info)
 
 
 class BlobInfoPage(handlers.BaseHandler):
@@ -147,6 +161,7 @@ app = webapp.WSGIApplication([('/?', HomePage),
                               ('/blob/upload-url', BlobUploadUrlPage),
                               ('/blob/upload-complete', BlobUploadCompletePage),
                               ('/blob/([^/]+)', BlobPage),
+                              ('/blob/([^/]+)/download', BlobDownloadPage),
                               ('/blob/([^/]+)/info', BlobInfoPage),
                               ('/showcase', ShowcasePage),
                               ('/sitemap.xml', SitemapXmlPage),

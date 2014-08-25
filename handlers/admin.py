@@ -165,11 +165,17 @@ class AdminBlobsNewPage(AdminPage):
     self.render('admin/blobs/new.html', {})
 
 
+class AdminBlobDeletePage(AdminPage):
+  def get(self):
+    pass
+
+
 app = webapp.WSGIApplication([('/admin', AdminDashboardPage),
                               ('/admin/posts', AdminPostListPage),
                               ('/admin/posts/import', AdminPostImportPage),
                               ('/admin/posts/([0-9]+|new)', AdminPostsPage),
                               ('/admin/posts/([0-9]+)/delete', AdminPostDeletePage),
                               ('/admin/blobs', AdminBlobsPage),
+                              ('/admin/blob/([^/]+)/delete', AdminBlobDeletePage),
                               ('/admin/blobs/new', AdminBlobsNewPage)],
                              debug=os.environ['SERVER_SOFTWARE'].startswith('Development'))
