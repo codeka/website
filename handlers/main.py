@@ -1,6 +1,7 @@
 
 import os
 import datetime
+import logging
 import webapp2 as webapp
 
 from google.appengine.ext.webapp import blobstore_handlers
@@ -11,6 +12,7 @@ from datetime import datetime, timedelta
 import json
 
 import ctrl.blog
+import ctrl.snip
 import handlers
 import model.blog
 
@@ -27,12 +29,10 @@ class HomePage(BasePage):
 class BlobUploadUrlPage(handlers.BaseHandler):
   def get(self):
     """Gets a new upload URL for uploading blobs."""
-    if not users.get_current_user():
-      self.response.set_status(403)
-      return
     url = blobstore.create_upload_url('/blob/upload-complete')
     data = {'upload_url': url}
     self.response.headers['Content-Type'] = 'application/json'
+    self.response.headers['Access-Control-Allow-Origin'] = 'chrome-extension://gmnllhiodgdkoeajblpaekccpomanklg'
     self.response.write(json.dumps(data))
 
 
@@ -54,17 +54,20 @@ class BlobUploadCompletePage(blobstore_handlers.BlobstoreUploadHandler):
       response['height'] = img.height
       response['url'] = images.get_serving_url(blob_info.key(), 100, 0)
     self.response.headers["Content-Type"] = "application/json"
+    self.response.headers['Access-Control-Allow-Origin'] = 'chrome-extension://gmnllhiodgdkoeajblpaekccpomanklg'
     self.response.write(json.dumps(response))
 
 
 class BlobPage(blobstore_handlers.BlobstoreDownloadHandler):
   def get(self, blob_key):
-    if not blobstore.get(blob_key):
+    blob_info = blobstore.get(blob_key)
+    if not blob_info:
       self.error(404)
     else:
       self.response.headers['Cache-Control'] = 'public, max-age='+str(30*24*60*60) # 30 days
       self.response.headers['Expires'] = (datetime.now() + timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-      self.send_blob(blob_key)
+      self.response.headers["Content-Type"] = blob_info.content_type
+      self.send_blob(blob_info)
 
 
 class BlobDownloadPage(blobstore_handlers.BlobstoreDownloadHandler):
@@ -111,7 +114,6 @@ class BlobInfoPage(handlers.BaseHandler):
             'filename': blob_info.filename,
             'url': images.get_serving_url(blob_key, size, crop)}
 
-
 class ShowcasePage(BasePage):
   def get(self):
     self.render('showcase.html', {})
@@ -142,6 +144,35 @@ class SitemapXmlPage(BasePage):
     self.render("sitemap.xml", {"pages": pages})
 
 
+class SnipCreatePage(BasePage):
+  def get(self):
+    blobKey = self.request.GET.get('blob_key')
+    if blobKey:
+      snip = ctrl.snip.createSnip(blobKey)
+      self.redirect('/snip/' + snip.slug)
+
+
+class SnipPage(BasePage):
+  def get(self, slug):
+    snip = ctrl.snip.getSnip(slug)
+    if not snip:
+      self.error(404)
+      return
+    self.render("snip.html", {"snip": snip})
+
+
+class SnipViewPage(blobstore_handlers.BlobstoreDownloadHandler):
+  def get(self, slug):
+    snip = ctrl.snip.getSnip(slug)
+    if not snip:
+      self.error(404)
+      return
+    self.response.headers["Cache-Control"] = "public, max-age="+str(30*24*60*60) # 30 days
+    self.response.headers["Expires"] = (datetime.now() + timedelta(days=30)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    self.response.headers["Content-Type"] = snip.blob.content_type
+    self.send_blob(snip.blob)
+
+
 class NotFoundPage(BasePage):
   """This is the 404 "not found" page. We'll try to do some guesses as to what you may have wanted though."""
   def get(self):
@@ -165,5 +196,8 @@ app = webapp.WSGIApplication([('/?', HomePage),
                               ('/blob/([^/]+)/info', BlobInfoPage),
                               ('/showcase', ShowcasePage),
                               ('/sitemap.xml', SitemapXmlPage),
+                              ('/snip/create', SnipCreatePage),
+                              ('/snip/([^/]+).png', SnipViewPage),
+                              ('/snip/([^/]+)', SnipPage),
                               ('.*', NotFoundPage)],
                              debug=os.environ['SERVER_SOFTWARE'].startswith('Development'))

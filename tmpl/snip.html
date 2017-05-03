@@ -1,0 +1,21 @@
+{% extends "skeleton.html" %}
+
+{% block header %}
+    <style>
+      #snip {
+        display: block;
+        max-width: none;
+        margin: 0 auto;
+        border: 1px dotted #ccc;
+      }
+    </style>
+{% endblock %}
+
+{% block maincontent %}
+    <img id="snip" src="/blob/{{ snip.blob.key() }}" width="{{ snip.width }}" height="{{ snip.height }}">
+  <section class="content">
+  </section>
+  <section class="copyright">
+    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Dean Harding</a>
+  </section>
+{% endblock %}
