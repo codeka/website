@@ -32,7 +32,7 @@ class BlobUploadUrlPage(handlers.BaseHandler):
     url = blobstore.create_upload_url('/blob/upload-complete')
     data = {'upload_url': url}
     self.response.headers['Content-Type'] = 'application/json'
-    self.response.headers['Access-Control-Allow-Origin'] = 'chrome-extension://gmnllhiodgdkoeajblpaekccpomanklg'
+    self.response.headers['Access-Control-Allow-Origin'] = '*' # TODO: restrict.
     self.response.write(json.dumps(data))
 
 
@@ -54,7 +54,7 @@ class BlobUploadCompletePage(blobstore_handlers.BlobstoreUploadHandler):
       response['height'] = img.height
       response['url'] = images.get_serving_url(blob_info.key(), 100, 0)
     self.response.headers["Content-Type"] = "application/json"
-    self.response.headers['Access-Control-Allow-Origin'] = 'chrome-extension://gmnllhiodgdkoeajblpaekccpomanklg'
+    self.response.headers['Access-Control-Allow-Origin'] = '*' # TODO: restrict
     self.response.write(json.dumps(response))
 
 

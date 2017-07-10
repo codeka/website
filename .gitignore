@@ -3,3 +3,6 @@
 
 # temp files:
 *~
+
+# Visual Studio Code files.
+.vscode
