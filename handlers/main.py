@@ -152,6 +152,13 @@ class SnipCreatePage(BasePage):
       self.redirect('/snip/' + snip.slug)
 
 
+class SnipNewPage(BasePage):
+  def get(self):
+    url = blobstore.create_upload_url('/blob/upload-complete')
+    data = {'upload_url': url}
+    self.render("snip-new.html", data)
+
+
 class SnipPage(BasePage):
   def get(self, slug):
     snip = ctrl.snip.getSnip(slug)
@@ -197,6 +204,7 @@ app = webapp.WSGIApplication([('/?', HomePage),
                               ('/showcase', ShowcasePage),
                               ('/sitemap.xml', SitemapXmlPage),
                               ('/snip/create', SnipCreatePage),
+                              ('/snip/new', SnipNewPage),
                               ('/snip/([^/]+).png', SnipViewPage),
                               ('/snip/([^/]+)', SnipPage),
                               ('.*', NotFoundPage)],

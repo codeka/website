@@ -1,0 +1,103 @@
+{% extends "skeleton.html" %}
+
+{% block header %}
+    <style>
+      canvas {
+        display: block;
+        margin: 0 auto;
+        width: 10px; height: 10px;
+      }
+      input[name=filename] {
+        display: block;
+        margin: 0 auto;
+      }
+      div.error {
+        margin-top: 10px;
+        color: red;
+        text-align: center;
+      }
+    </style>
+{% endblock %}
+
+{% block maincontent %}
+  <section class="content">
+    <h1>New Snip</h1>
+    <p>Either paste your image here, or drag-and-drop it onto the page. If you want to give it a
+      filename, enter it below first.</p>
+    <input type="text" name="filename" placeholder="Filename" />
+    <div class="error">&nbsp;</div>
+    <canvas id="canvas"></canvas>
+  </section>
+  <section class="copyright">
+    Copyright &copy; 2005-{{year}} by <a href="http://www.codeka.com.au/">Dean Harding</a>
+  </section>
+  <script>
+    // Clipboard handling class, taken from https://stackoverflow.com/a/18387322
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    document.addEventListener("paste", function (e) {
+      if (e.clipboardData) {
+        var items = e.clipboardData.items;
+        if (!items) {
+          return;
+        }
+
+        handleItems(items);
+        e.preventDefault();
+      }
+    }, false);
+
+    $(document)
+      .on("drag dragstart dragend dragover dragenter dragleave drop", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      })
+      .on("dragover dragenter", function(e) {
+        $("div.error").html("Drop file.");
+      })
+      .on("dragleave dragend drop", function(e) {
+        $("div.error").html("&nbsp;");
+      })
+      .on("drop", function(e) {
+        $("div.error").html("&nbsp;");
+        uploadImage(e.originalEvent.dataTransfer.files[0]);
+      });
+
+    function handleItems(items) {
+      var gotImage = false;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") !== -1) {
+          var blob = items[i].getAsFile();
+          var URLObj = window.URL || window.webkitURL;
+          this.uploadImage(blob);
+          gotImage = true;
+          break;
+        }
+      }
+      if (!gotImage) {
+        $("div.error").html("No image in clipboard.");
+      }
+    }
+
+    function uploadImage(blob) {
+      $("div.error").html("Uploading...");
+
+      xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function() {
+        data = JSON.parse(this.responseText);
+        location.href = "/snip/create?blob_key=" + data.blob_key;
+      });
+      xhr.open("POST", "{{upload_url}}");
+
+      var fileName = $("input[name=filename]").val();
+      if (!fileName) {
+        fileName = "pasted-image.png";
+      }
+
+      var form = new FormData();
+      form.append("file", blob, fileName);
+      xhr.send(form);
+    };
+  </script>
+{% endblock %}
