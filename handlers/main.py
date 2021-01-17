@@ -114,6 +114,12 @@ class BlobInfoPage(handlers.BaseHandler):
             'filename': blob_info.filename,
             'url': images.get_serving_url(blob_key, size, crop)}
 
+
+class PicscanPage(BasePage):
+  def get(self):
+    self.render('picscan/index.html', {})
+
+
 class ShowcasePage(BasePage):
   def get(self):
     self.render('showcase.html', {})
@@ -123,7 +129,7 @@ class SitemapXmlPage(BasePage):
   def get(self):
     pages = []
     pages.append({
-        "url": "http://www.codeka.com.au/showcase",
+        "url": "//www.codeka.com/showcase",
         "lastmod": "2014-01-01",
         "priority": 1,
         "changefreq": "yearly"
@@ -134,7 +140,7 @@ class SitemapXmlPage(BasePage):
                   .order('-posted'))
     for post in query:
       pages.append({
-          "url": ("http://www.codeka.com.au/blog/%04d/%02d/%s" %
+          "url": ("//www.codeka.com/blog/%04d/%02d/%s" %
                      (post.posted.year, post.posted.month, post.slug)),
           "lastmod": "%04d-%02d-%02d" % (post.updated.year, post.updated.month, post.updated.day),
           "priority": 10,
@@ -201,6 +207,7 @@ app = webapp.WSGIApplication([('/?', HomePage),
                               ('/blob/([^/]+)', BlobPage),
                               ('/blob/([^/]+)/download', BlobDownloadPage),
                               ('/blob/([^/]+)/info', BlobInfoPage),
+                              ('/picscan', PicscanPage),
                               ('/showcase', ShowcasePage),
                               ('/sitemap.xml', SitemapXmlPage),
                               ('/snip/create', SnipCreatePage),

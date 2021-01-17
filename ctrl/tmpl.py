@@ -24,7 +24,7 @@ jinja.filters['post_url'] = _filter_post_url
 
 
 def _filter_post_full_url(post):
-  return 'http://'+os.environ.get('HTTP_HOST')+'/blog/'+_filter_post_url(post)
+  return '//'+os.environ.get('HTTP_HOST')+'/blog/'+_filter_post_url(post)
 jinja.filters['post_full_url'] = _filter_post_full_url
 
 
