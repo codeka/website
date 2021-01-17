@@ -19,7 +19,14 @@
         padding-top: 32px;
         height: 32px;
       }
+      a.lightbox img {
+        display: block;
+        margin: 0 auto;
+      }
     </style>
+    <link rel="stylesheet" href="/v{{resource_version}}/css/lightbox.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/v{{resource_version}}/js/lightbox.js"></script>
 {% endblock %}
 
 {% block maincontent %}
@@ -35,9 +42,37 @@
       paper, then share those documents as flat-scanned PDF files.
     </p>
 
-    <p><img src="/v{{resource_version}}/img/picscan/take-photo.jpg" width="237" height="500" /></p>
-    <p><img src="/v{{resource_version}}/img/picscan/adjust-corners.jpg" width="237" height="500" /></p>
-    <p><img src="/v{{resource_version}}/img/picscan/filter-image.jpg" width="237" height="500" /></p>
+    <p>I built this app because I wasn't particularly happy with the closed-source alternatives
+      (CamScanner, one of more popular closed-source alternatives is so riddled with ads, and it
+      puts a watermark on every document you scan, unless you pay some insane monthly fee for the
+      'premium' version.)</p>
+
+    <p>Using Pic Scan is as easy as 1-2-3!</p>
+
+    <h3>1. Take a photo</h3>
+    <p>The app works best if you put the document on a non-white table. My floor works well for
+      me.</p>
+    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/take-photo-big.jpg">
+      <img src="/v{{resource_version}}/img/picscan/take-photo.jpg" width="237" height="500" />
+    </a></p>
+
+    <h3>2. Adjust the corners of the page</h3>
+    <p>The app will attempt to automatically detect the corners of the page (this picture is how
+      it automatically detected this document). But you can manually move the corners around
+      yourself to tweak the results.</p>
+    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/adjust-corners-big.jpg">
+      <img src="/v{{resource_version}}/img/picscan/adjust-corners.jpg" width="237" height="500" />
+    </a></p>
+
+    <h3>3. Filter image, to create that flatbed-scanner look</h3>
+    <p>This step is optional and attempts to remove the lighting and create a nice white background
+      for printing your documents.
+    </p>
+    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/filter-image-big.jpg">
+      <img src="/v{{resource_version}}/img/picscan/filter-image.jpg" width="237" height="500" />
+    </a></p>
+    <hr/>
+    <a href="/picscan/privacy-policy">Privacy Policy</a>
   </section>
   <section class="copyright">
     Copyright &copy; 2005-{{year}} by <a href="//www.codeka.com/">Dean Harding</a>

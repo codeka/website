@@ -120,6 +120,11 @@ class PicscanPage(BasePage):
     self.render('picscan/index.html', {})
 
 
+class PicscanPrivacyPage(BasePage):
+  def get(self):
+    self.render('picscan/privacy-policy.html', {})
+
+
 class ShowcasePage(BasePage):
   def get(self):
     self.render('showcase.html', {})
@@ -208,6 +213,7 @@ app = webapp.WSGIApplication([('/?', HomePage),
                               ('/blob/([^/]+)/download', BlobDownloadPage),
                               ('/blob/([^/]+)/info', BlobInfoPage),
                               ('/picscan', PicscanPage),
+                              ('/picscan/privacy-policy', PicscanPrivacyPage),
                               ('/showcase', ShowcasePage),
                               ('/sitemap.xml', SitemapXmlPage),
                               ('/snip/create', SnipCreatePage),

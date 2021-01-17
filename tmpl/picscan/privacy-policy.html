@@ -1,0 +1,51 @@
+{% extends "skeleton.html" %}
+
+{% block header %}
+    <style>
+      div.title {
+        margin-top: 10pt;
+        height: 128px;
+      }
+      img.logo {
+        border-radius: 10pt;
+        float: left;
+      }
+      div.title h1, div.title h2 {
+        margin: 0 0 0 128px;
+        padding: 0 0 0 10pt;
+        height: 64px;
+      }
+      div.title h1 {
+        padding-top: 32px;
+        height: 32px;
+      }
+      a.lightbox img {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+{% endblock %}
+
+{% block maincontent %}
+  <section class="content">
+    <div class="title">
+      <img src="/v{{resource_version}}/img/picscan/picscan.png" class="logo" width="128" height="128" />
+      <h1>PicScan</h1>
+      <h2>Privacy Policy</h2>
+    </div>
+
+    <p>
+      PicScan does not share any data with a server. We don't display ads, we don't have a server
+      to send your data to.
+    </p>
+
+    <p>
+      If you choose to use the app to share a PDF file, then only that PDF is shared with the
+      receiving app.
+    </p>
+
+  </section>
+  <section class="copyright">
+    Copyright &copy; 2005-{{year}} by <a href="//www.codeka.com/">Dean Harding</a>
+  </section>
+{% endblock %}
