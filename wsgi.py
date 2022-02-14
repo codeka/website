@@ -1,11 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask
+
+from .ctrl import ctrl, tmpl
+from .handlers import handlers, main
 
 app = Flask(__name__)
+app.register_blueprint(ctrl)
+app.register_blueprint(handlers)
 
-@app.route('/')
-def index():
-  return render_template('index.html')
-
-@app.route('/showcase')
-def showcase():
-  return render_template('showcase.html')

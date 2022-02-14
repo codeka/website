@@ -24,15 +24,15 @@
         margin: 0 auto;
       }
     </style>
-    <link rel="stylesheet" href="/v{{resource_version}}/css/lightbox.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="/v{{resource_version}}/js/lightbox.js"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
 {% endblock %}
 
 {% block maincontent %}
   <section class="content">
     <div class="title">
-      <img src="/v{{resource_version}}/img/picscan/picscan.png" class="logo" width="128" height="128" />
+      <img src="{{ url_for('static', filename='img/picscan/picscan.png') }}" class="logo" width="128" height="128" />
       <h1>PicScan</h1>
       <h2>Scan documents with the camera on your phone</h2>
     </div>
@@ -52,24 +52,24 @@
     <h3>1. Take a photo</h3>
     <p>The app works best if you put the document on a non-white table. My floor works well for
       me.</p>
-    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/take-photo-big.jpg">
-      <img src="/v{{resource_version}}/img/picscan/take-photo.jpg" width="237" height="500" />
+    <p><a title="" class="lightbox" href="{{ url_for('static', filename='img/picscan/take-photo-big.jpg') }}">
+      <img src="{{ url_for('static', filename='img/picscan/take-photo.jpg') }}" width="237" height="500" />
     </a></p>
 
     <h3>2. Adjust the corners of the page</h3>
     <p>The app will attempt to automatically detect the corners of the page (this picture is how
       it automatically detected this document). But you can manually move the corners around
       yourself to tweak the results.</p>
-    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/adjust-corners-big.jpg">
-      <img src="/v{{resource_version}}/img/picscan/adjust-corners.jpg" width="237" height="500" />
+    <p><a title="" class="lightbox" href="{{ url_for('static', filename='img/picscan/adjust-corners-big.jpg') }}">
+      <img src="{{ url_for('static', filename='img/picscan/adjust-corners.jpg') }}" width="237" height="500" />
     </a></p>
 
     <h3>3. Filter image, to create that flatbed-scanner look</h3>
     <p>This step is optional and attempts to remove the lighting and create a nice white background
       for printing your documents.
     </p>
-    <p><a title="" class="lightbox" href="/v{{resource_version}}/img/picscan/filter-image-big.jpg">
-      <img src="/v{{resource_version}}/img/picscan/filter-image.jpg" width="237" height="500" />
+    <p><a title="" class="lightbox" href="{{ url_for('static', filename='img/picscan/filter-image-big.jpg') }}">
+      <img src="{{ url_for('static', filename='img/picscan/filter-image.jpg') }}" width="237" height="500" />
     </a></p>
     <hr/>
     <a href="/picscan/privacy-policy">Privacy Policy</a>
