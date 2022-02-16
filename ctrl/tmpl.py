@@ -1,13 +1,9 @@
 import datetime
 import json
 import os
-from flask import render_template
+from flask import current_app
 
 from . import ctrl
-
-@ctrl.app_template_filter()
-def post_id(post):
-  return post.key().id()
 
 
 @ctrl.app_template_filter()
@@ -22,7 +18,10 @@ def post_url(post):
 
 @ctrl.app_template_filter()
 def post_full_url(post):
-  return '//'+os.environ.get('HTTP_HOST')+'/blog/'+_filter_post_url(post)
+  host = current_app.config['SERVER_NAME']
+  if not host:
+    host = '??'
+  return '//'+host+'/blog/'+post_url(post)
 
 
 @ctrl.app_template_filter()

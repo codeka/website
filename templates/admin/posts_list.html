@@ -17,9 +17,9 @@
         <td>{{post.posted}}</td>
         <td>{{post.isPublished}}</td>
         <td>
-          <a href="posts/{{post|post_id}}">Edit</a> &bull;
+          <a href="posts/{{post|post_url}}">Edit</a> &bull;
           <a href="/blog/{{post|post_url}}">View</a> &bull;
-          <a href="posts/{{post|post_id}}/delete">Delete</a>
+          <a href="posts/{{post|post_url}}/delete">Delete</a>
         </td>
       </tr>
     {% endfor %}

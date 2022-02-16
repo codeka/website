@@ -5,10 +5,10 @@
 {% block pagetitleprefix %}{% endblock %}
 {% block pagetitle %}{{post.title}} - Dean's Blog{% endblock %}
 {% block title %}Development Blog{% endblock %}
-{% block headerlinks %}<a href="/blog/rss" class="rss-btn"><img src="/v{{resource_version}}/img/rss.png" alt="RSS" width="32" height="32" title="RSS Feed" /></a>{% endblock %}
+{% block headerlinks %}<a href="/blog/rss" class="rss-btn"><img src="{{url_for('static', filename='img/rss.png')}}" alt="RSS" width="32" height="32" title="RSS Feed" /></a>{% endblock %}
 
 {% block adminbuttons %}
-    <li><a href="/admin/posts/{{post|post_id}}">Edit Post</a></li>
+    <li><a href="/admin/posts/{{post|post_url}}">Edit Post</a></li>
 {% endblock %}
 
 {% block maincontent %}
@@ -18,7 +18,7 @@
       <div id="disqus_thread"></div>
       <script type="text/javascript">
         var disqus_shortname = "codeka";
-        var disqus_identifier = "{{post|post_id}}";
+        var disqus_identifier = "{{post|post_url}}";
         var disqus_url = "{{post|post_full_url}}";
         {% if is_development_server -%}
 var disqus_developer = true;

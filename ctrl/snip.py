@@ -1,11 +1,16 @@
 
 import logging
 import random
-
-from google.appengine.api import images
-from google.appengine.api import memcache
+import re
 
 import model.snip
+
+SLUG_REGEX = re.compile(r"^[a-zA-Z]+$")
+
+
+def _isValidSlug(slug):
+  return SLUG_REGEX.match(slug) != None
+
 
 def createSnip(blobKey):
   slug = ""
@@ -31,11 +36,7 @@ def createSnip(blobKey):
 
   return snip
 
-def getSnip(slug):
-  keyname = 'snip:%s' % slug
-  snip = memcache.get(keyname)
-  if not snip:
-    for snip in model.snip.Snip.all().filter('slug', slug):
-      memcache.set(keyname, snip)
-      return snip
-  return snip
+def getSnipPath(slug):
+  if not _isValidSlug(slug):
+    return None
+  return model.snip.getSnipPath(slug)

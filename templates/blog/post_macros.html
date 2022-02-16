@@ -10,11 +10,11 @@
       <span class="author">by <a rel="author" href="https://plus.google.com/111859491490622271994?rel=author">Dean Harding</a></span>
     </header>
     <div itemprop="articleBody">
-      {{post.html}}
+      {{post.html|safe}}
     </div>
     {% if not is_part_of_list %}
     <footer>
-      <img src="/v{{resource_version}}/img/ninja.jpg" width="100" height="100" alt="">
+      <img src="{{url_for('static', filename='img/ninja.jpg')}}" width="100" height="100" alt="">
       <div>Posted <span>{{post|post_date}}</span> by <span>Dean Harding</span></div>
       <div><a href="/blog/rss">Subscribe to our RSS feed</a>.</div>
       <ul class="social">
@@ -31,16 +31,16 @@
 {%- endmacro %}
 
 {% macro html_header(resource_version) -%}
-  <link rel="stylesheet" href="/v{{resource_version}}/css/blog.css">
-  <link rel="stylesheet" href="/v{{resource_version}}/css/lightbox.css">
-  <link href="/v{{resource_version}}/css/highlight/shCore.css" rel="stylesheet" />
-  <link href="/v{{resource_version}}/css/highlight/shThemeDefault.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/blog.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/lightbox.css')}}">
+  <link href="{{url_for('static', filename='css/highlight/shCore.css')}}" rel="stylesheet" />
+  <link href="{{url_for('static', filename='css/highlight/shThemeDefault.css')}}" rel="stylesheet" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/rss" />
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="/v{{resource_version}}/js/lightbox.js"></script>
-  <script src="/v{{resource_version}}/js/highlight/shCore.js"></script>
-  <script src="/v{{resource_version}}/js/highlight/shAutoloader.js"></script>
+  <script src="{{url_for('static', filename='js/lightbox.js')}}"></script>
+  <script src="{{url_for('static', filename='js/highlight/shCore.js')}}"></script>
+  <script src="{{url_for('static', filename='js/highlight/shAutoloader.js')}}"></script>
 {%- endmacro %}
 
 
@@ -49,7 +49,7 @@
   function path() {
     var args = arguments, result = [];
     for(var i = 0; i < args.length; i++) {
-      result.push(args[i].replace('@', '/v{{resource_version}}/js/highlight/'));
+      result.push(args[i].replace('@', '{{url_for("static", filename="js/highlight/")}}'));
     }
     return result;
   }
