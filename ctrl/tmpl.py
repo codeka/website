@@ -66,9 +66,7 @@ def number(n):
 
 def inject_defaults():
   return dict(
-    year=datetime.datetime.now().year,
-    host_server=request.server,
-    url=request.url)
+    year=datetime.datetime.now().year)
 ctrl.app_context_processor(inject_defaults)
 
 #  if user:
