@@ -86,13 +86,16 @@
       xhr = new XMLHttpRequest();
       xhr.addEventListener("load", function() {
         data = JSON.parse(this.responseText);
-        location.href = "/snip/create?blob_key=" + data.blob_key;
+        location.href = "/snip/" + data.slug;
       });
-      xhr.open("POST", "{{upload_url}}");
+      xhr.open("POST", "/snip/upload?redirect=0");
 
       var fileName = $("input[name=filename]").val();
       if (!fileName) {
-        fileName = "pasted-image.png";
+        fileName = blob.name;
+        if (!fileName) {
+          fileName = "pasted-image.png";
+        }
       }
 
       var form = new FormData();

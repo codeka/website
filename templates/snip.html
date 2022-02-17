@@ -8,13 +8,19 @@
         margin: 0 auto;
         border: 1px dotted #ccc;
       }
+
+      .content p {
+        font-weight: bold;
+        font-size: 125%;
+      }
     </style>
 {% endblock %}
 
 {% block maincontent %}
-  <img id="snip" src="/blob/{{ snip.blob.key() }}" width="{{ snip.width }}" height="{{ snip.height }}">
   <section class="content">
+    <p>{{snip.filename}} ({{snip.width}}x{{snip.height}})</p>
   </section>
+  <img id="snip" src="/snip/{{snip.slug}}.png" width="{{snip.width}}" height="{{snip.height}}">
   <section class="copyright">
     Copyright &copy; 2005-{{year}} by <a href="//www.codeka.com/">Dean Harding</a>
   </section>
