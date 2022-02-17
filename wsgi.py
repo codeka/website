@@ -1,4 +1,5 @@
 from flask import Flask, redirect, request
+from flask_cors import CORS
 from urllib.parse import urlparse, urlunparse
 
 from ctrl import ctrl, tmpl
@@ -8,6 +9,8 @@ app = Flask(__name__)
 app.config['CANONICAL_HOST'] = None
 app.config['DATA_PATH'] = '/tmp'
 app.config.from_envvar('CONFIG_FILE')
+
+CORS(app, resources={"/snip/upload": {"origin": "*"}})
 
 app.register_blueprint(ctrl)
 app.register_blueprint(handlers)
